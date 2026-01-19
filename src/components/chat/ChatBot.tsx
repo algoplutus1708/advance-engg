@@ -13,7 +13,8 @@ export function ChatBot() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "Hello! I'm the Advance Engineering assistant. How can I help you learn about our services or get in touch with us?",
+      // UPDATED: Added the name "Engie" to the greeting
+      content: "Hello! I'm Engie, the Advance Engineering assistant. How can I help you learn about our services or get in touch with us?",
     },
   ]);
   const [input, setInput] = useState("");
@@ -152,7 +153,8 @@ export function ChatBot() {
               <Bot className="w-5 h-5" />
             </div>
             <div>
-              <p className="font-semibold text-sm">Advance Engineering</p>
+              {/* UPDATED: Changed display name to "Engie" */}
+              <p className="font-semibold text-sm">Engie</p>
               <p className="text-xs text-muted-foreground">AI Assistant</p>
             </div>
           </div>
