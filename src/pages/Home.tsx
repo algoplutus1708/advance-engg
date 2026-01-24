@@ -294,7 +294,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto px-6 text-center">
           <AnimatedSection>
             <p className="text-2xl md:text-3xl lg:text-4xl leading-relaxed text-foreground font-light">
-              Under the guidance of Prime Minister Shri Narendra Modi, we are proud
+              Under the guidance of Prime Minister Of India, we are proud
               to drive the <span className="font-semibold">Make in India</span> initiative.
             </p>
           </AnimatedSection>
