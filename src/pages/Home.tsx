@@ -311,7 +311,7 @@ export default function Home() {
           </AnimatedSection>
           <AnimatedSection delay={0.2}>
             <p className="mt-10 text-xl md:text-2xl leading-relaxed text-muted-foreground">
-              Advance Engineering Company is the only Indian company credentialed by
+              Advance Engineering Company is the only Indian company accredited by
               RDSO to collaborate on{" "}
               <span className="text-foreground font-medium">
                 Instrumented Measuring Wheelsets (IMW)
