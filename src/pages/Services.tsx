@@ -1,9 +1,17 @@
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Cog, CircuitBoard, CheckCircle } from "lucide-react";
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { ArrowRight, Cog, CircuitBoard, CheckCircle, ChevronLeft, ChevronRight } from "lucide-react";
+import { motion, useInView, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Layout } from "@/components/layout/Layout";
 import imwTechnology from "@/assets/imw-technology.jpg";
+
+// New Numeric Project Images
+import img1 from "@/assets/1.jpg";
+import img2 from "@/assets/2.jpg";
+import img3 from "@/assets/3.jpg";
+import img4 from "@/assets/4.jpg";
+import img5 from "@/assets/5.jpg";
+import img6 from "@/assets/6.jpg"; // Imported the new image
 
 function AnimatedSection({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null);
@@ -24,10 +32,162 @@ function AnimatedSection({ children, className = "", delay = 0 }: { children: Re
 
 const capabilities = [
   "Custom-engineered testing equipment",
-  "Comprehensive pre-handover validation",
+  "Surface preparation final stage complete",
+  "Strain gauges marking started",
   "Elimination of import bottlenecks",
   "Meeting stringent compliance deadlines",
 ];
+
+const serviceSlides = [
+  {
+    image: img1,
+    title: "Surface Prep: Stage 1",
+    subtitle: "Cleaned and prepped wheelset surface",
+  },
+  {
+    image: img3,
+    title: "Marking Process",
+    subtitle: "Precision layout for strain gauges",
+  },
+  {
+    image: img2,
+    title: "Surface Inspection",
+    subtitle: "Quality check before sensor application",
+  },
+  {
+    image: img4,
+    title: "Sensor Placement",
+    subtitle: "Aligning gauges for optimal data collection",
+  },
+  {
+    image: img5,
+    title: "Lab Operations",
+    subtitle: "Ongoing testing and calibration",
+  },
+];
+
+function ImageCarousel() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setDirection(1);
+      setCurrentSlide((prev) => (prev + 1) % serviceSlides.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const nextSlide = () => {
+    setDirection(1);
+    setCurrentSlide((prev) => (prev + 1) % serviceSlides.length);
+  };
+
+  const prevSlide = () => {
+    setDirection(-1);
+    setCurrentSlide((prev) => (prev - 1 + serviceSlides.length) % serviceSlides.length);
+  };
+
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 300 : -300,
+      opacity: 0,
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1,
+    },
+    exit: (direction: number) => ({
+      zIndex: 0,
+      x: direction < 0 ? 300 : -300,
+      opacity: 0,
+    }),
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 60 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
+      transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
+      className="relative w-full aspect-[16/9] md:aspect-[21/9] rounded-3xl overflow-hidden bg-surface shadow-2xl shadow-black/5"
+    >
+      <AnimatePresence initial={false} custom={direction}>
+        <motion.div
+          key={currentSlide}
+          custom={direction}
+          variants={slideVariants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{
+            x: { type: "spring", stiffness: 300, damping: 30 },
+            opacity: { duration: 0.3 },
+          }}
+          className="absolute inset-0"
+        >
+          <img
+            src={serviceSlides[currentSlide].image}
+            alt={serviceSlides[currentSlide].title}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+        </motion.div>
+      </AnimatePresence>
+
+      <button
+        onClick={prevSlide}
+        className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white transition-all duration-300 hover:bg-white/20 hover:scale-110"
+      >
+        <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
+      </button>
+      <button
+        onClick={nextSlide}
+        className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white transition-all duration-300 hover:bg-white/20 hover:scale-110"
+      >
+        <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
+      </button>
+
+      <div className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+        {serviceSlides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => {
+              setDirection(index > currentSlide ? 1 : -1);
+              setCurrentSlide(index);
+            }}
+            className={`h-1.5 rounded-full transition-all duration-300 ${
+              index === currentSlide 
+                ? "w-8 bg-white" 
+                : "w-1.5 bg-white/40 hover:bg-white/60"
+            }`}
+          />
+        ))}
+      </div>
+
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentSlide}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.3 }}
+          className="absolute bottom-12 md:bottom-16 left-6 md:left-10 z-20"
+        >
+          <p className="text-white/70 text-xs md:text-sm uppercase tracking-widest mb-1">
+            {serviceSlides[currentSlide].subtitle}
+          </p>
+          <h3 className="text-white text-xl md:text-2xl lg:text-3xl font-semibold">
+            {serviceSlides[currentSlide].title}
+          </h3>
+        </motion.div>
+      </AnimatePresence>
+    </motion.div>
+  );
+}
 
 export default function Services() {
   const heroRef = useRef(null);
@@ -74,6 +234,17 @@ export default function Services() {
         </motion.div>
       </section>
 
+      {/* Carousel Section */}
+      <section className="py-20 md:py-28 bg-surface/50">
+        <div className="container-wide">
+          <AnimatedSection className="mb-10 text-center">
+             <h3 className="text-3xl font-semibold mb-2">Live Status</h3>
+             <p className="text-muted-foreground">Current project milestones and operations</p>
+          </AnimatedSection>
+          <ImageCarousel />
+        </div>
+      </section>
+
       {/* Section 1: The Void - White Background */}
       <section className="py-28 md:py-36 bg-background">
         <div className="container-wide">
@@ -108,48 +279,32 @@ export default function Services() {
                 </AnimatedSection>
               </div>
             </div>
+            
+            {/* Replaced Placeholder with Image 6.jpg */}
             <AnimatedSection delay={0.2}>
               <div className="relative">
-                {/* Technical Schematic Placeholder */}
                 <motion.div
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.5 }}
-                  className="aspect-square bg-gradient-to-br from-surface to-surface/50 rounded-3xl flex items-center justify-center relative overflow-hidden shadow-2xl shadow-foreground/5"
+                  className="aspect-square bg-surface rounded-3xl overflow-hidden shadow-2xl shadow-foreground/5 relative group"
                 >
-                  <div className="relative z-10 text-center p-8">
-                    <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                      className="w-32 h-32 mx-auto mb-6 rounded-full bg-background flex items-center justify-center shadow-xl"
-                    >
-                      <Cog className="w-16 h-16 text-foreground" />
-                    </motion.div>
-                    <p className="text-sm font-medium text-muted-foreground uppercase tracking-widest">
+                  <img 
+                    src={img6} 
+                    alt="IMW Technical Schematic" 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/80 to-transparent">
+                    <p className="text-sm font-medium text-white/90 uppercase tracking-widest">
                       IMW Technical Schematic
                     </p>
-                    <p className="text-xs text-muted-foreground/60 mt-2">
+                    <p className="text-xs text-white/60 mt-2">
                       Precision Engineered Wheelset
                     </p>
                   </div>
-                  {/* Decorative circles */}
-                  <motion.div
-                    animate={{ rotate: -360 }}
-                    transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                    className="absolute inset-8 border border-foreground/5 rounded-full"
-                  />
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                    className="absolute inset-16 border border-foreground/10 rounded-full"
-                  />
-                  <motion.div
-                    animate={{ rotate: -360 }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    className="absolute inset-24 border border-foreground/5 rounded-full"
-                  />
                 </motion.div>
               </div>
             </AnimatedSection>
+
           </div>
         </div>
       </section>
@@ -188,7 +343,7 @@ export default function Services() {
                 </p>
               </AnimatedSection>
               <AnimatedSection delay={0.3}>
-                <div className="mt-10 grid grid-cols-2 gap-4">
+                <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4">
                   {capabilities.map((capability, index) => (
                     <motion.div
                       key={index}

@@ -3,10 +3,16 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Train, Shield, Zap, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, useScroll, useTransform, useInView, AnimatePresence } from "framer-motion";
 import { Layout } from "@/components/layout/Layout";
+
+// Original Asset
 import vandeBharatHero from "@/assets/vande-bharat-hero.jpg";
-import engineeringLab from "@/assets/engineering-lab.jpg";
-import precisionEngineering from "@/assets/precision-engineering.jpg";
-import imwTechnology from "@/assets/imw-technology.jpg";
+
+// New Numeric Project Images
+import img1 from "@/assets/1.jpg";
+import img2 from "@/assets/2.jpg";
+import img3 from "@/assets/3.jpg";
+import img4 from "@/assets/4.jpg";
+import img5 from "@/assets/5.jpg";
 
 function AnimatedSection({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null);
@@ -51,27 +57,32 @@ function FeatureCard({ title, description, icon: Icon, delay }: { title: string;
   );
 }
 
-// Carousel data
+// Carousel data - Using numeric images 1-5
 const carouselSlides = [
   {
-    image: vandeBharatHero,
-    title: "Vande Bharat Express",
-    subtitle: "Precision testing for India's pride",
+    image: img1,
+    title: "Surface Preparation",
+    subtitle: "Final stage of wheelset surface prep complete",
   },
   {
-    image: engineeringLab,
-    title: "State-of-the-Art Labs",
-    subtitle: "Advanced testing & calibration facilities",
+    image: img3,
+    title: "Strain Gauge Marking",
+    subtitle: "Precision marking process in progress",
   },
   {
-    image: precisionEngineering,
-    title: "Precision Engineering",
-    subtitle: "Micron-level accuracy in every measurement",
+    image: img2,
+    title: "Technical Validation",
+    subtitle: "Ensuring surface integrity before installation",
   },
   {
-    image: imwTechnology,
-    title: "IMW Technology",
-    subtitle: "Instrumented Measuring Wheelsets innovation",
+    image: img4,
+    title: "Gauge Installation",
+    subtitle: "Preparing for sensor mounting",
+  },
+  {
+    image: img5,
+    title: "IMW Project Status",
+    subtitle: "Live view from the engineering floor",
   },
 ];
 

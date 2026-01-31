@@ -41,7 +41,7 @@ const contactInfo = [
     icon: MapPin,
     label: "Address",
     value: "6/41 Netaji Nagar, Near Netaji Nagar Women's College, Kolkata - 700091",
-    href: "https://maps.google.com/?q=Netaji+Nagar+Kolkata+700091",
+    href: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3686.076332141517!2d88.3756819!3d22.4842106!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02710033c5e8b5%3A0x6f9168923304499e!2s6%2F41%2C%20Netaji%20Nagar%2C%20Kolkata%2C%20West%20Bengal%20700092!5e0!3m2!1sen!2sin!4v1716900000000!5m2!1sen!2sin",
   },
 ];
 
@@ -366,7 +366,7 @@ export default function Contact() {
       <AnimatedSection>
         <section className="w-full h-[400px] md:h-[500px] bg-muted overflow-hidden">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3686.524893456789!2d88.3513!3d22.4947!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjLCsDI5JzQwLjkiTiA4OMKwMjEnMDQuNyJF!5e0!3m2!1sen!2sin!4v1234567890"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3686.076332141517!2d88.3756819!3d22.4842106!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02710033c5e8b5%3A0x6f9168923304499e!2s6%2F41%2C%20Netaji%20Nagar%2C%20Kolkata%2C%20West%20Bengal%20700092!5e0!3m2!1sen!2sin!4v1716900000000!5m2!1sen!2sin"
             width="100%"
             height="100%"
             style={{ border: 0 }}
