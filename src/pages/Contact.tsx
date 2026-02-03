@@ -41,8 +41,8 @@ const contactInfo = [
     icon: MapPin,
     label: "Address",
     value: "6/41 Netaji Nagar, Near Netaji Nagar Women's College, Kolkata - 700091",
-    // Link updated to the share link provided
-    href: "https://maps.app.goo.gl/euZ4nbrgVPZWqo8L7",
+    // UPDATED: Location Link
+    href: "https://maps.app.goo.gl/pwJJJKUGL6SASVy59",
   },
 ];
 
@@ -355,7 +355,7 @@ export default function Contact() {
                     Business Hours
                   </p>
                   <p className="text-foreground font-medium">Monday - Saturday</p>
-                  <p className="text-muted-foreground">9:00 AM - 6:00 PM IST</p>
+                  <p className="text-muted-foreground">10:00 AM - 6:00 PM IST</p>
                 </div>
               </AnimatedSection>
             </div>
@@ -366,9 +366,9 @@ export default function Contact() {
       {/* Map Section */}
       <AnimatedSection>
         <section className="w-full h-[400px] md:h-[500px] bg-muted overflow-hidden">
-          {/* Iframe Updated with the provided share link */}
+          {/* UPDATED: Iframe URL */}
           <iframe
-            src="https://maps.app.goo.gl/euZ4nbrgVPZWqo8L7"
+            src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3686.6349135493583!2d88.35644447529779!3d22.480349779557553!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjLCsDI4JzQ5LjMiTiA4OMKwMjEnMzIuNSJF!5e0!3m2!1sen!2sin!4v1770103124415!5m2!1sen!2sin"
             width="100%"
             height="100%"
             style={{ border: 0 }}
