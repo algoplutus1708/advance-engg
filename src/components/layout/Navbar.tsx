@@ -16,6 +16,11 @@ export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
+  // Determine if we should show the solid background/dark text
+  // Show if we have scrolled OR if we are NOT on the home page
+  const isHome = location.pathname === "/";
+  const showNavbarBackground = isScrolled || !isHome;
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -31,7 +36,7 @@ export function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled ? "glass-nav py-3" : "bg-transparent py-5"
+        showNavbarBackground ? "glass-nav py-3" : "bg-transparent py-5"
       }`}
     >
       <nav className="container-wide flex items-center justify-between">
@@ -39,7 +44,7 @@ export function Navbar() {
         <Link
           to="/"
           className={`text-xl font-semibold tracking-tight transition-colors duration-300 ${
-            isScrolled ? "text-foreground" : "text-white"
+            showNavbarBackground ? "text-foreground" : "text-white"
           }`}
         >
           Advance Engineering
@@ -53,7 +58,7 @@ export function Navbar() {
                 <Link
                   to={link.path}
                   className={`text-sm font-medium transition-all duration-300 hover:opacity-60 ${
-                    isScrolled
+                    showNavbarBackground
                       ? location.pathname === link.path
                         ? "text-foreground"
                         : "text-muted-foreground"
@@ -67,16 +72,17 @@ export function Navbar() {
               </li>
             ))}
           </ul>
-          <ThemeToggle isScrolled={isScrolled} />
+          {/* Pass the calculated state to ThemeToggle so it adapts correctly */}
+          <ThemeToggle isScrolled={showNavbarBackground} />
         </div>
 
         {/* Mobile Controls */}
         <div className="flex md:hidden items-center gap-2">
-          <ThemeToggle isScrolled={isScrolled} />
+          <ThemeToggle isScrolled={showNavbarBackground} />
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className={`p-2 transition-colors duration-300 ${
-              isScrolled ? "text-foreground" : "text-white"
+              showNavbarBackground ? "text-foreground" : "text-white"
             }`}
             aria-label="Toggle menu"
           >
