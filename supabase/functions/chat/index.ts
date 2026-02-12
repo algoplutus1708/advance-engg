@@ -41,6 +41,7 @@ COMPANY PROFILE:
 - Location: 6/41 Netaji Nagar, Kolkata - 700091.
 - Contact: info@advanceng.in | 033 451 80382
 - HR: hr@advanceng.in
+- Business Hours: Monday - Saturday, 10:00 AM - 6:00 PM IST.
 
 VALUE PROPOSITION:
 - "Make in India": We eliminate the reliance on foreign OEMs (Original Equipment Manufacturers), reducing costs and lead times.
