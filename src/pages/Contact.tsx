@@ -7,6 +7,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 
+// UPDATED: Your new Google Apps Script URL
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxBOdbn3muxofeiFzV-yUUa07UEcBI58iTIppjU_UyZJkV2QhA6d7LXidiLXKEZ158U/exec"; 
+
 function AnimatedSection({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
@@ -41,8 +44,7 @@ const contactInfo = [
     icon: MapPin,
     label: "Address",
     value: "6/41 Netaji Nagar, Near Netaji Nagar Women's College, Kolkata - 700091",
-    // UPDATED: Location Link
-    href: "https://maps.app.goo.gl/pwJJJKUGL6SASVy59",
+    href: "https://maps.app.goo.gl/euZ4nbrgVPZWqo8L7",
   },
 ];
 
@@ -96,31 +98,65 @@ export default function Contact() {
       return;
     }
 
+    if (!GOOGLE_SCRIPT_URL) {
+      toast({
+        title: "Configuration Error",
+        description: "Google Script URL is missing. Please update Contact.tsx.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      // Use URLSearchParams for better compatibility with Google Apps Script
+      const params = new URLSearchParams();
+      params.append("name", formData.name);
+      params.append("email", formData.email);
+      params.append("phone", formData.phone);
+      params.append("company", formData.company);
+      params.append("subject", formData.subject);
+      params.append("message", formData.message);
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    
-    toast({
-      title: "Message sent successfully!",
-      description: "We'll get back to you within 24-48 business hours.",
-    });
-
-    // Reset form after delay
-    setTimeout(() => {
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        company: "",
-        subject: "",
-        message: "",
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        body: params,
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
       });
-      setIsSubmitted(false);
-    }, 3000);
+
+      setIsSubmitted(true);
+      toast({
+        title: "Message sent successfully!",
+        description: "We'll get back to you within 24-48 business hours.",
+      });
+
+      // Reset form after delay
+      setTimeout(() => {
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          company: "",
+          subject: "",
+          message: "",
+        });
+        setIsSubmitted(false);
+      }, 3000);
+
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast({
+        title: "Submission failed",
+        description: "There was an error sending your message. Please try again or email us directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -355,7 +391,7 @@ export default function Contact() {
                     Business Hours
                   </p>
                   <p className="text-foreground font-medium">Monday - Saturday</p>
-                  <p className="text-muted-foreground">10:00 AM - 6:00 PM IST</p>
+                  <p className="text-muted-foreground">9:00 AM - 6:00 PM IST</p>
                 </div>
               </AnimatedSection>
             </div>
@@ -366,9 +402,9 @@ export default function Contact() {
       {/* Map Section */}
       <AnimatedSection>
         <section className="w-full h-[400px] md:h-[500px] bg-muted overflow-hidden">
-          {/* UPDATED: Iframe URL */}
+          {/* Iframe Updated with the provided share link */}
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3686.6349135493583!2d88.35644447529779!3d22.480349779557553!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjLCsDI4JzQ5LjMiTiA4OMKwMjEnMzIuNSJF!5e0!3m2!1sen!2sin!4v1770103124415!5m2!1sen!2sin"
+            src="https://maps.app.goo.gl/euZ4nbrgVPZWqo8L7"
             width="100%"
             height="100%"
             style={{ border: 0 }}
