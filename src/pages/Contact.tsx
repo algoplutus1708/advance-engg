@@ -404,7 +404,7 @@ export default function Contact() {
         <section className="w-full h-[400px] md:h-[500px] bg-muted overflow-hidden">
           {/* Iframe Updated with the provided share link */}
           <iframe
-            src="https://maps.app.goo.gl/euZ4nbrgVPZWqo8L7"
+            src="https://maps.google.com/maps?q=6%2F41%20Netaji%20Nagar%2C%20Near%20Netaji%20Nagar%20Women's%20College%2C%20Kolkata%20-%20700091&t=&z=15&ie=UTF8&iwloc=&output=embed"
             width="100%"
             height="100%"
             style={{ border: 0 }}
