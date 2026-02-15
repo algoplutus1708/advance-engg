@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import logo from "@/assets/Logo.jpg";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -36,18 +37,26 @@ export function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        showNavbarBackground ? "glass-nav py-3" : "bg-transparent py-5"
+        showNavbarBackground ? "glass-nav py-2" : "bg-transparent py-4"
       }`}
     >
       <nav className="container-wide flex items-center justify-between">
         {/* Logo */}
         <Link
           to="/"
-          className={`text-xl font-semibold tracking-tight transition-colors duration-300 ${
-            showNavbarBackground ? "text-foreground" : "text-white"
-          }`}
+          className="flex items-center gap-2 transition-opacity hover:opacity-90"
         >
-          Advance Engineering
+          <img 
+            src={logo} 
+            alt="Advance Engineering Logo" 
+            className="h-10 w-auto rounded-sm object-contain" 
+          />
+          {/* Optional: Keep text for accessibility or if logo is icon-only, otherwise remove span below */}
+          <span className={`text-lg font-semibold tracking-tight transition-colors duration-300 ${
+            showNavbarBackground ? "text-foreground" : "text-white"
+          }`}>
+            Advance Engineering
+          </span>
         </Link>
 
         {/* Desktop Navigation */}

@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import { motion, useInView } from "framer-motion";
+import logo from "@/assets/Logo.jpg";
 
 function AnimatedSection({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null);
@@ -60,9 +61,13 @@ export function Footer() {
               transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
               viewport={{ once: true }}
             >
-              <span className="text-5xl md:text-6xl font-bold tracking-tighter">
-                Ae
-              </span>
+              <div className="mb-6">
+                <img 
+                  src={logo} 
+                  alt="Advance Engineering" 
+                  className="h-20 w-auto rounded-lg bg-white p-1" 
+                />
+              </div>
               <p className="mt-4 text-background/50 text-sm">
                 Advance Engineering Company
               </p>
