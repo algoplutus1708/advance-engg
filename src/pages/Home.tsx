@@ -166,7 +166,7 @@ export default function Home() {
 
       <section className="py-32 md:py-40 bg-surface">
         <div className="container-wide grid md:grid-cols-3 gap-6">
-          <FeatureCard icon={Shield} title="RDSO Certified" description="Trusted by the premier R&D wing of Indian Railways." delay={0.1} />
+          <FeatureCard icon={Shield} title="Partner with RDSO" description="Trusted by the premier R&D wing of Indian Railways." delay={0.1} />
           <FeatureCard icon={Train} title="Make in India" description="Domestic manufacturing of high-precision telemetry." delay={0.2} />
           <FeatureCard icon={Zap} title="Future Ready" description="Innovative solutions for high-speed rail validation." delay={0.3} />
         </div>
